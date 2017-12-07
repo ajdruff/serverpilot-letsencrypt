@@ -3,7 +3,7 @@ Add Let's Encrypt Certificate to Server Pilot's Free Plan
 
 
 
-#Overview
+# Overview
 
 Server Pilot doesn't provide any documentation on installing let's encyrpt yourself, since its trying to nudge you to their paid plan, which includes it.
 
@@ -11,7 +11,7 @@ Instead, there are a number of scripts and random posts that provide various sol
 
 
 
-##References:
+## References:
 
 * [Installing Let's Encrypt with Cerbot on DigitalOcean & ServerPilot](https://gist.github.com/knynkwl/7f20d57b39979e19ae0e98465eab7ece) 
 * [Improve SSL Performance with Nginx](https://serverfault.com/q/770464/395483)
@@ -44,7 +44,7 @@ Search and Replace the downloaded file to replace values specific for your site.
 
 
 
-##Step 2 - Install certbot
+## Step 2 - Install certbot
 
 Certbot, formerly letsencrypt, is a Let's Encrypt client developed by [EFF](https://certbot.eff.org/about/).
 
@@ -84,13 +84,13 @@ For production use, use the following:
 
 
 
-##Testing
+## Testing
 
 
-##Contributors
+## Contributors
 
 Andrew Druffner <andrew@nomstock.com>
 
-##Attributions
+## Attributions
 
 Original SSL configuration taken from: [knynkwl/letsencrypt.md](https://gist.github.com/knynkwl/7f20d57b39979e19ae0e98465eab7ece)
