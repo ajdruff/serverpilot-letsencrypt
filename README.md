@@ -23,7 +23,9 @@ I mostly followed [knynkwl/letsencrypt.md](https://gist.github.com/knynkwl/7f20d
 * [Certbot](https://certbot.eff.org/)
 * [HSTS and Let's Encrypt](https://timkadlec.com/2016/01/hsts-and-lets-encrypt/)
 
-## Step 1 - Create the Nginx SSL Configuration File
+## Certificate Installation
+
+### Step 1 - Create the Nginx SSL Configuration File
 
 Configure your SSL configuration file for Nginx. If you skip or forget this step, you will get a 'refusal to connect' type error when you attempt to use https to access your site.
 
@@ -47,7 +49,7 @@ Search and Replace the downloaded file to replace values specific for your site.
 
 
 
-## Step 2 - Install certbot
+### Step 2 - Install certbot
 
 Certbot, formerly letsencrypt, is a Let's Encrypt client developed by [EFF](https://certbot.eff.org/about/).
 
@@ -85,7 +87,7 @@ For production use, use the following:
 >be sure to place which ever domain you'd like to appear on your certificate first when you list your domains.
 
 
-# Configure for autorenew
+### Step 3 - Configure for autorenew
 
 `certbit renew` will renew all certificates within 30 days of expiring.
 
@@ -99,12 +101,12 @@ add the following to crontab:
 
 
 
-# Check if Need Renewal
+#### Check if Need Renewal
 
     certbot renew
 
 
-# Force HTTPS
+### Step 4  - Force HTTPS
 
 
 Download nginx-sp.custom.conf :
@@ -119,7 +121,7 @@ Edit the file place holders with your domain name:
     sed -i 's|DOMAIN_NAME|example.com|g' wordpress.custom.conf
 
 
-# Force Redirect of www to Non-WWW (optional)
+### Step 5  - Force Redirect of www to Non-WWW (optional)
 
 If you want to force redirect of www.example.com to example.com, do this :
 
@@ -144,7 +146,7 @@ remove `www.example.com` from wordpress.ssl.conf from the server_name directive 
       listen [::]:443 ssl http2;
       server_name example.com;
 
-# Final Check
+### Final Check
 
 Check your installation with Qualys SSL Labs Free Check:
 
@@ -260,13 +262,13 @@ HSTS can make it seem like your redirects are working when they aren't, so turn 
 We also don't want to completely depend on HSTS.
 We still want to force using redirects in case HSTSgets misconfigured, we want to make sure we are still enforcing https.
 
-###Things to Look For While Troubleshooting
+##### Things to Look For While Troubleshooting
 
 * are there excessive redirects?
 * are the redirects working properly
 * are you getting a message that HSTS policy is being enforced?
 
-###Check Syntax of Configuration Files
+##### Check Syntax of Configuration Files
 
 Check Syntax for Nginx configuration:
 
