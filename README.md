@@ -157,49 +157,7 @@ Check your installation with Qualys SSL Labs Free Check:
 ### Troubleshooting
 
 
-Restart after configuration changes:
-
-    service nginx-sp restart
-
-
-
-Use wget to troubleshoot
-
-
-    wget --no-hsts http://www.example.com/ | grep Location:
-
-
-#### Turn Off HSTS while troubleshooting
-
-[HSTS](https://timkadlec.com/2016/01/hsts-and-lets-encrypt/)
-
-HSTS can make it seem like your redirects are working when they aren't, so turn it off when you are troubleshooting using wget with the `--no-hsts` flag.
-
-We also don't want to completely depend on HSTS.
-We still want to force using redirects in case HSTSgets misconfigured, we want to make sure we are still enforcing https.
-
-### Things to Look For While Troubleshooting
-
-* are there excessive redirects?
-* are the redirects working properly
-* are you getting a message that HSTS policy is being enforced?
-
-### Check Syntax of Configuration Files
-
-Check Syntax for Nginx configuration:
-
-    sudo /opt/sp/nginx/sbin/nginx -T
-
-Check Syntax for Apache:
-
-
-    sudo /opt/sp/apache/bin/apachectl -t
-
-
-
-
-
-## Key and Certificate Checks
+#### Key and Certificate Checks
 
 For the following checks, set a shell variable equal to your domain.
 
@@ -219,7 +177,7 @@ This will allow you to copy and paste the commands into your shell without any e
 
 
 
-### Server Key Checks
+##### Server Key Checks
 
     openssl rsa -in /etc/letsencrypt/live/$DOMAIN/privkey.pem -check | grep RSA
 
@@ -227,7 +185,7 @@ This will allow you to copy and paste the commands into your shell without any e
 * expected response: RSA key Ok
 
 
-### CSR Checks
+##### CSR Checks
 
 
      openssl req -text -noout -verify -in /etc/letsencrypt/csr/0001_csr-certbot.pem
@@ -238,7 +196,7 @@ This will allow you to copy and paste the commands into your shell without any e
 * what this will do: check your certificate request.
 * expected response: verify OK
 
-### Cert and Key Match Checks
+##### Cert and Key Match Checks
 
 Copy and paste all of the following lines into your bash shell. They will calculate a checksum of the certificate and key for comparison.
 
@@ -252,7 +210,7 @@ Copy and paste all of the following lines into your bash shell. They will calcul
 * expected response: `Match`
 
 
-### Server Certificate Checks:
+##### Server Certificate Checks:
 
     openssl x509 -in /etc/letsencrypt/live/$DOMAIN/cert.pem -text -noout
 
@@ -260,7 +218,7 @@ Copy and paste all of the following lines into your bash shell. They will calcul
 * expected response: Prints the Certificate to your terminal.
 
 
-### SSL Client Checks
+##### SSL Client Checks
 
 **verify that subject alternate names are present**
 
@@ -277,24 +235,23 @@ To check that alternate names have been correctly set:
 Chrome will require that at least one alternate names be set (e.g., www.example.com in addition to examplel.com)
 
 
-##Redirect Troubleshooting
+#### Redirect Troubleshooting
 
 After applying the 'force https' and 'redirect to non-www' changes, you may have issues with trying to get everything working. 
 
-Here are some tips:
 
-Restart Nginx after all configuration changes:
+**Restart Nginx after all configuration changes:**
 
     service nginx-sp restart
 
 
-Use wget to troubleshoot
+**Use wget to troubleshoot**
 
 
     wget --no-hsts http://www.example.com/ | grep Location:
 
 
-####Turn Off HSTS while troubleshooting
+**Turn Off HSTS while troubleshooting**
 
 [HSTS](https://timkadlec.com/2016/01/hsts-and-lets-encrypt/)
 
